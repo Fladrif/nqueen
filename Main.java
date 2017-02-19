@@ -1,8 +1,29 @@
 public class Main {
   public static void main(String[] args) {
-		testClimb(1000, 8);
-		testGenes(10, 50);
+		exhaustiveTest();
   }
+
+	private static void exhaustiveTest() {
+		for (int i = 1; i <= 9; i++) {
+			int size = (i * 2) + 2;
+			System.out.println(size + "x" + size + " board");
+			testClimb(1000000, size);
+		}
+		for (int popSize = 2; popSize < 30; popSize += 2) {
+			for (int boardSize = 4; boardSize < 52; boardSize += 4) {
+				long totalTime = 0;
+				for (int h = 0; h < 100; h++) {
+					long start = System.nanoTime();
+					testGenes(popSize, boardSize);
+					long end = System.nanoTime();
+					
+					totalTime += (end - start) / 1000000;
+				}
+				System.out.print(totalTime / 100 + " ");
+			}
+			System.out.println();
+		}
+	}
 
   private static void printBoard(int[][] board) {
     Heuristic heur = new Heuristic();
@@ -59,13 +80,13 @@ public class Main {
 		// Generate new population
 		for (int i = 0; i < POP_SIZE; i++) {
 			Board tempBoard	= new Board(BOARD_SIZE);
-			printBoard(tempBoard.getBoard());
+			// printBoard(tempBoard.getBoard());
 			population[i] = tempBoard.getBoard();
 		}
 		Genetic gene = new Genetic();
 		
 		// run genetic algorithm outputting successful individual
 		int[][] theOne = gene.evolution(population);
-		printBoard(theOne);
+		// printBoard(theOne);
 	}
 }
