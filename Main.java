@@ -1,6 +1,6 @@
 public class Main {
   public static void main(String[] args) {
-		test();
+		testGenes();
   }
 
   private static void printBoard(int[][] board) {
@@ -14,8 +14,8 @@ public class Main {
     System.out.println("Heuristic: " + heur.getHeuristic(board));
   }
 
-	private static void test() {
-		int INIT_COUNT = 100;
+	private static void testClimb() {
+		int INIT_COUNT = 1000000;
 		int count = INIT_COUNT;
 		int complete = 0;
     Heuristic heur = new Heuristic();
@@ -27,6 +27,19 @@ public class Main {
 			if (heur.getHeuristic(solBoard) == 0) complete++;
 			count--;
 		}
-		System.out.println(complete + "/" + INIT_COUNT + " = " + complete / INIT_COUNT);
+		System.out.println(complete + "/" + INIT_COUNT + " = " + ((float) complete / (float) INIT_COUNT));
+	}
+
+	private static void testGenes() {
+		int POP_SIZE = 12;
+		int BOARD_SIZE = 8;
+		int[][][] population = new int[POP_SIZE][BOARD_SIZE][BOARD_SIZE];
+		for (int i = 0; i < POP_SIZE; i++) {
+			Board tempBoard	= new Board(BOARD_SIZE);
+			population[i] = tempBoard.getBoard();
+		}
+		Genetic gene = new Genetic();
+		int[][] theOne = gene.evolution(population);
+		printBoard(theOne);
 	}
 }
