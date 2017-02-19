@@ -7,21 +7,18 @@ public class Heuristic {
           for (int k = i + 1; k < board.length; k++) {
             if (board[k][j] == 1) {
               count++;
-              break;
             }
           }
           if (i > j) {
             for (int k = 1; k < board.length - i; k++) {
               if (board[i + k][j + k] == 1) {
                 count++;
-                break;
               }
             }
           } else {
             for (int k = 1; k < board.length - j; k++) {
               if (board[i + k][j + k] == 1) {
                 count++;
-                break;
               }
             }
           }
@@ -29,14 +26,12 @@ public class Heuristic {
             for (int k = 1; k <= j; k++) {
               if (board[i + k][j - k] == 1) {
                 count++;
-                break;
               }
             }
           } else {
             for (int k = 1; k < board.length - i; k++) {
               if (board[i + k][j - k] == 1) {
                 count++;
-                break;
               }
             }
           }
