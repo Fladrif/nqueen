@@ -1,6 +1,10 @@
 public class Heuristic {
   public int getHeuristic(int[][] board) {
     int count = 0;
+
+		// iterates through the board, incrementing the heuristic
+		// for each other queen in it's line of sight only looking 
+		// in the non-decreasing direction to avoid duplicates
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[i].length; j++) {
         if (board[i][j] == 1) {
