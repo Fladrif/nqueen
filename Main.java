@@ -15,7 +15,7 @@ public class Main {
   }
 
 	private static void testClimb() {
-		int INIT_COUNT = 1000000;
+		int INIT_COUNT = 10000;
 		int count = INIT_COUNT;
 		int complete = 0;
     Heuristic heur = new Heuristic();
@@ -32,10 +32,11 @@ public class Main {
 
 	private static void testGenes() {
 		int POP_SIZE = 12;
-		int BOARD_SIZE = 8;
+		int BOARD_SIZE = 50;
 		int[][][] population = new int[POP_SIZE][BOARD_SIZE][BOARD_SIZE];
 		for (int i = 0; i < POP_SIZE; i++) {
 			Board tempBoard	= new Board(BOARD_SIZE);
+			printBoard(tempBoard.getBoard());
 			population[i] = tempBoard.getBoard();
 		}
 		Genetic gene = new Genetic();
