@@ -1,4 +1,8 @@
+import java.util.*;
+
 public class Genetic {
+	Heuristic heur = new Heuristic();
+
 	public int[][][] evolve(int[][][] population) {
 		int[][][] newParents = getNewGeneration(population);
 		int[][][] newBreed = breedNewGeneration(newParents);
@@ -7,22 +11,43 @@ public class Genetic {
 		return mutGen;
 	}
 
-	private int[][][] mutate(int[][][] generation) {
-		int[][][] mutGeneration = null;
-		return mutGeneration;
+	public int[][][] mutate(int[][][] generation) {
+		for (int i = 0; i < generation.length; i++) {
+			Random rand = new Random();
+			int random = rand.nextInt(9);
+			if (random <= 2) {
+				int col = rand.nextInt(generation[i].length);
+				int pos = rand.nextInt(generation[i].length);
+				for (int j = 0; j < generation[i][col].length; j++) {
+					generation[i][col][j] = 0;
+				}
+				generation[i][col][pos] = 1;
+			}
+		}
+		return generation;
 	}
 
 	private int[][][] breedNewGeneration(int[][][] newParents) {
+		Random rand = new Random();
 		int popSize = newParents.length;
 		int boardSize = newParents[0].length;
 		int[][][] newBreed = new int[popSize * 2][boardSize][boardSize];
+		int breedNum = 0;
 		for (int i = 0; i < newParents.length; i++) {
+			if (i + 1 == newParents.length) {
+				int cross = rand.nextInt(newParents[i].length - 2) + 1;
+				newBreed[breedNum++] = crossover(newParents[i], newParents[0], cross);
+				newBreed[breedNum++] = crossover(newParents[0], newParents[i], cross);
+			} else {
+				int cross = rand.nextInt(newParents[i].length - 2) + 1;
+				newBreed[breedNum++] = crossover(newParents[i], newParents[i + 1], cross);
+				newBreed[breedNum++] = crossover(newParents[i + 1], newParents[i], cross);
+			}
 		}
-		return null;
+		return newBreed;
 	}
 
-	public int[][][] getNewGeneration(int[][][] population) {
-		Heuristic heur = new Heuristic();
+	private int[][][] getNewGeneration(int[][][] population) {
 		int[] heuristics = new int[population.length];
 		int[][][] newGeneration = new int[population.length / 2][population[0].length][population[0].length];
 
@@ -60,7 +85,17 @@ public class Genetic {
 	}
 
 	public int[][] evolution(int[][][] population) {
-		return null;
+		int realizedIndividual = -1;
+		while (realizedIndividual == -1) {
+			population = evolve(population);
+			for (int i = 0; i < population.length; i++) {
+				if (heur.getHeuristic(population[i]) == 0) {
+					realizedIndividual = i;
+					break;
+				}
+			}
+		}
+		return population[realizedIndividual];
 	}
 
 	private int[][] copyBoard(int[][] board) {
@@ -72,5 +107,21 @@ public class Genetic {
 		}
 
 		return newBoard;
+	}
+
+	private int[][] crossover(int[][] firstParent, int[][] secondParent, int crossPoint) {
+		int[][] child = new int[firstParent.length][firstParent.length];
+		for (int i = 0; i < crossPoint; i++) {
+			for (int j = 0; j < child.length; j++) {
+				child[i][j] = firstParent[i][j];
+			}
+		}
+		for (int i = crossPoint; i < child.length; i++) {
+			for (int j = 0; j < child.length; j++) {
+				child[i][j] = secondParent[i][j];
+			}
+		}
+
+		return child;
 	}
 }
