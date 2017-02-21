@@ -1,0 +1,42 @@
+4x4 board
+39427/100000 = 0.39427
+Avg total time: 0.000080 in ms
+Avg total complete time: 0.000025 in ms
+6x6 board
+10512/100000 = 0.10512
+Avg total time: 0.000070 in ms
+Avg total complete time: 0.000000 in ms
+8x8 board
+14693/100000 = 0.14693
+Avg total time: 0.000160 in ms
+Avg total complete time: 0.000136 in ms
+10x10 board
+6713/100000 = 0.06713
+Avg total time: 0.000760 in ms
+Avg total complete time: 0.000894 in ms
+12x12 board
+4955/100000 = 0.04955
+Avg total time: 0.011380 in ms
+Avg total complete time: 0.035923 in ms
+14x14 board
+3594/100000 = 0.03594
+Avg total time: 0.876040 in ms
+Avg total complete time: 1.051475 in ms
+16x16 board
+3211/100000 = 0.03211
+Avg total time: 1.957750 in ms
+Avg total complete time: 2.509810 in ms
+18x18 board
+2575/100000 = 0.02575
+Avg total time: 4.051320 in ms
+Avg total complete time: 4.990291 in ms
+20x20 board
+2199/100000 = 0.02199
+Avg total time: 7.103280 in ms
+Avg total complete time: 8.552069 in ms
+0 26 53 162 344 440 737 984 1876 2465 4305 
+0 147 80 141 309 551 756 932 1972 2720 3946 
+0 4455 5459 179 351 546 743 1503 1833 2616 2956 
+0 24033 2652 154 323 564 1134 1531 2033 2806 4661 
+0 27 155 144290 336 612 992 1410 2240 3165 5181 
+0 15680 190444 
